@@ -1,0 +1,61 @@
+definitions:
+  internal.ErrorResponse:
+    properties:
+      error:
+        type: string
+      status:
+        type: integer
+    type: object
+  internal.SuccessResponse:
+    properties:
+      description:
+        type: string
+      forecast:
+        type: string
+      time:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /weather-today:
+    get:
+      consumes:
+      - application/json
+      description: Returns short forecast and temperature description
+      parameters:
+      - description: Latitude
+        in: query
+        name: latitude
+        required: true
+        type: string
+      - description: Longitude
+        in: query
+        name: longitude
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/internal.SuccessResponse'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/internal.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/internal.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal.ErrorResponse'
+      summary: Get today's weather
+      tags:
+      - weather-today
+swagger: "2.0"

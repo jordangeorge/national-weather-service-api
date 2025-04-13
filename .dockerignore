@@ -1,0 +1,9 @@
+.git
+*.md
+
+
+notes.txt
+JHcodingprompts.docx
+other/
+*.DS_Store
+.vscode/
